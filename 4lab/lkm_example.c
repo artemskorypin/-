@@ -1,8 +1,7 @@
-#include <linux/module.h>
-#include <linux/fs.h>
-#include <linux/time.h>
-#include <linux/uaccess.h>
-#include <linux/delay.h>
+#include <linux/module.h>//нужен для всех модулей
+#include <linux/fs.h>//для работы с файлами
+#include <linux/time.h>//для работы с временем
+#include <linux/delay.h>//для задержек
 
 #define FILENAME "example.txt"
 
@@ -17,19 +16,19 @@ static int __init my_init(void) {
 
     while(file_read_count < 3)
     {
-    	file = filp_open(FILENAME, O_RDONLY, 0);
-    	if (IS_ERR(file)) {
+    	file = filp_open(FILENAME, O_RDONLY, 0);//открыли файл
+    	if (IS_ERR(file)) {//проверили, что открылся
         	printk("Error opening file\n");
         	return PTR_ERR(file);
     	}
 
     	long day = (24 * 60 * 60);   
     	struct timespec64 current_time;
-    	ktime_get_real_ts64(&current_time);
+    	ktime_get_real_ts64(&current_time);//текущее время с начала эпохи
     
-    	// Получаем количество секунд с начала дня
     	long long times = current_time.tv_sec;
-
+	    
+	// Получаем количество секунд с начала дня
     	long seconds_since_midnight = (times) % day;
 	
     	// Вычисляем количество минут
