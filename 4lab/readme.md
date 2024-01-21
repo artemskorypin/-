@@ -8,4 +8,5 @@
 2. оформляться в виде файла *.ko;
 3. загружаться командой insmod и выгружаться командой rmmod;
 4. при загрузке выводить в dmesg соответствующие строки;
+
 ![](https://sun9-31.userapi.com/impg/rkPItdFmGR8E_xsqg60JO6A-jskK8HXxjUM4-g/HWa8FP12Vy4.jpg?size=510x340&quality=95&crop=46,0,592,395&sign=e560a8d78b862f920179fc6c9444f519&c_uniq_tag=kda7qZJcL3gX1ruzKN7RcQvHlAvUeW3MMVBu6CJay20&type=album)
