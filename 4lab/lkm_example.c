@@ -18,7 +18,7 @@ static int __init my_init(void) {
     {
     	file = filp_open(FILENAME, O_RDONLY, 0);//открыли файл
     	if (IS_ERR(file)) {//проверили, что открылся
-        	printk("Error opening file\n");
+        	pr_info("Error opening file\n");
         	return PTR_ERR(file);
     	}
 
@@ -63,7 +63,7 @@ static int __init my_init(void) {
 }
 
 static void __exit my_exit(void) {
-    printk("Module unloaded\n");
+    pr_info("Module unloaded\n");
 }
 
 module_init(my_init);
