@@ -45,9 +45,9 @@ static ssize_t proc_read(struct file *file, char *buf, size_t count, loff_t *pos
     // ...	
 	
     if (read_count % 2 == 0) {
-        len = snprintf(message, sizeof(message), "Minutes since previous noon: %d\n", elapsed_minutes);
+        len = snprintf(message, sizeof(message), "прошло %d минут\n", elapsed_minutes);
     } else {
-        len = snprintf(message, sizeof(message), "Minutes until next noon: %d\n", remaining_minutes);
+        len = snprintf(message, sizeof(message), "осталось %d минут\n", remaining_minutes);
     }
   
     *pos += len;
