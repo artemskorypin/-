@@ -13,6 +13,14 @@ static int read_count = 0;
 
 static ssize_t proc_read(struct file *file, char *buf, size_t count, loff_t *pos) {
 
+    int len;
+    char message[64];
+
+    if (*pos > 0) {
+        // Inform the kernel that there is no more data to be read
+        return 0;
+    }
+	
     struct timespec64 current_time;
     ktime_get_real_ts64(&current_time);
     
@@ -24,9 +32,9 @@ static ssize_t proc_read(struct file *file, char *buf, size_t count, loff_t *pos
     // Вычисляем количество минут
     int minutes_since_midnight = seconds_since_midnight / 60;
 
-	int elapsed_minutes = minutes_since_midnight;
+    int elapsed_minutes = minutes_since_midnight;
     int remaining_minutes = 60 - elapsed_minutes;
-	
+    
     // Четное чтение файла
     // Вычисляем количество минут, прошедших с начала текущего часа
     // и выводим это значение
@@ -34,15 +42,18 @@ static ssize_t proc_read(struct file *file, char *buf, size_t count, loff_t *pos
     // Нечетное чтение файла
     // Вычисляем количество минут, оставшихся до следующего часа
     // и выводим это значение
-    // ...
+    // ...	
+	
     if (read_count % 2 == 0) {
-        pr_info("%d of minutes since the beginning of the current hour\n", elapsed_minutes);
+        len = snprintf(message, sizeof(message), "Minutes since previous noon: %d\n", elapsed_minutes);
     } else {
-        pr_info("%d of minutes remaining until the next hour\n", remaining_minutes);
+        len = snprintf(message, sizeof(message), "Minutes until next noon: %d\n", remaining_minutes);
     }
-
+  
+    *pos += len;
     read_count++;
-    return 0;
+    return len;
+	    
 }
 
 static const struct proc_ops proc_ops = {
