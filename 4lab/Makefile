@@ -10,3 +10,8 @@ test:
 	sudo rmmod lkm_example.ko
 	dmesg
 
+start:
+	sudo dmesg -C
+	sudo insmod lkm_example.ko
+	dmesg
+
