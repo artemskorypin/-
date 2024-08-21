@@ -8,7 +8,7 @@
 #define procfs_name "tsulab"
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Skoriupin Artem");
-MODULE_DESCRIPTION("A simple example of a Linux module for time.");
+MODULE_DESCRIPTION("A simple example of a Linux module for time");
 static struct proc_dir_entry *our_proc_file = NULL;
 
 static int read_count = 0;
